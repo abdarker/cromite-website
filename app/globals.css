@@ -11,3 +11,14 @@ body {
     text-wrap: balance;
   }
 }
+
+h1,
+h2,
+h3,
+h4 {
+  @apply text-neutral-900;
+}
+
+p{
+    @apply text-neutral-600
+}

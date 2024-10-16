@@ -57,11 +57,11 @@ export default function Home() {
           <div className="mb-6 flex justify-center">
             <Image
               title="Cromite - Take back your browser!"
-              src="https://www.bromite.org/bromite.png"
+              src="https://camo.githubusercontent.com/6b4ee03be91712db2d81b603a1bb83553e97b66fa49443bf27b641089ea51696/68747470733a2f2f7777772e63726f6d6974652e6f72672f6170705f69636f6e2e706e67"
               width={96}
               height={96}
               alt="Cromite"
-              className="rounded shadow-lg"
+              className=""
             />
           </div>
 
@@ -154,7 +154,7 @@ export default function Home() {
 
         <DownloadSelector />
 
-        <section>
+        <section className="mb-4">
           <h2 className="mb-2 text-2xl font-semibold">Other downloads</h2>
           <ul className="list-inside list-disc">
             <li>
@@ -181,7 +181,22 @@ export default function Home() {
           </ul>
         </section>
       </main>
-      <footer className="bg-gray-200">Footer</footer>
+      <footer className="text-center">
+        <nav>
+          <a href="/" className="mx-2 hover:underline">
+            Home
+          </a>
+          <a
+            href="https://github.com/bromite/bromite"
+            className="mx-2 hover:underline"
+          >
+            Github project
+          </a>
+          <a href="/privacy" className="mx-2 hover:underline">
+            Privacy Policy
+          </a>
+        </nav>
+      </footer>
     </div>
   );
 }

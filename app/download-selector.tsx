@@ -1,7 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const releases = {
+// Define a type for platform keys
+type PlatformKey = "android" | "systemWebView" | "linux" | "windows";
+//  eslint-disable-next-line
+const releases: Record<PlatformKey, any> = {
   android: {
     arm64:
       "https://github.com/uazo/cromite/releases/latest/download/arm64_ChromePublic.apk",
@@ -20,27 +23,36 @@ const releases = {
 };
 
 const platforms = [
-  { name: "Android", key: "android", archs: ["arm64", "arm", "x64"] },
-  { name: "System WebView", key: "systemWebView", archs: ["arm64", "x64"] },
-  { name: "Linux", key: "linux", archs: [] },
-  { name: "Windows", key: "windows", archs: [] },
+  {
+    name: "Android",
+    key: "android" as PlatformKey,
+    archs: ["arm64", "arm", "x64"],
+  },
+  {
+    name: "System WebView",
+    key: "systemWebView" as PlatformKey,
+    archs: ["arm64", "x64"],
+  },
+  { name: "Linux", key: "linux" as PlatformKey, archs: [] },
+  { name: "Windows", key: "windows" as PlatformKey, archs: [] },
 ];
 
 const DownloadSelector = () => {
-  // Set default values for selectedPlatform and selectedArch
-  const [selectedPlatform, setSelectedPlatform] = useState<string>("android");
+  const [selectedPlatform, setSelectedPlatform] =
+    useState<PlatformKey>("android");
   const [selectedArch, setSelectedArch] = useState<string>("arm64");
 
   useEffect(() => {
-    // Reset selectedArch if platform changes
     const platform = platforms.find((p) => p.key === selectedPlatform);
     if (platform && platform.archs.length > 0) {
-      setSelectedArch(platform.archs[0]); // Default to the first architecture
+      setSelectedArch(platform.archs[0]);
+    } else {
+      setSelectedArch("");
     }
   }, [selectedPlatform]);
 
   const handlePlatformChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedPlatform(event.target.value);
+    setSelectedPlatform(event.target.value as PlatformKey);
   };
 
   const handleArchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,11 +60,10 @@ const DownloadSelector = () => {
   };
 
   const getDownloadLink = () => {
-    if (!selectedPlatform) return "";
-    if (selectedArch) {
-      return releases[selectedPlatform][selectedArch] || "";
+    if (platforms.find((p) => p.key === selectedPlatform)?.archs.length === 0) {
+      return releases[selectedPlatform];
     }
-    return releases[selectedPlatform] || "";
+    return releases[selectedPlatform][selectedArch] || "";
   };
 
   return (
@@ -103,9 +114,9 @@ const DownloadSelector = () => {
 
       <a
         href={getDownloadLink()}
-        className={`flex md:w-1/3 cursor-pointer items-center rounded-lg bg-neutral-950 px-4 py-2 text-white transition-colors duration-200 hover:bg-neutral-800 ${!selectedArch ? "cursor-not-allowed opacity-50" : ""}`}
+        className={`flex cursor-pointer items-center rounded-lg bg-neutral-950 px-4 py-2 text-white transition-colors duration-200 hover:bg-neutral-800 md:w-1/3 ${!getDownloadLink() ? "cursor-not-allowed opacity-50" : ""}`}
         download
-        style={{ pointerEvents: selectedArch ? "auto" : "none" }}
+        style={{ pointerEvents: getDownloadLink() ? "auto" : "none" }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +130,7 @@ const DownloadSelector = () => {
             clipRule="evenodd"
           />
         </svg>
-        Download Cromite 
+        Download Cromite
       </a>
     </section>
   );

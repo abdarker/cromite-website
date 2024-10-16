@@ -7,8 +7,8 @@ export default function Home() {
       <header className="">
         <h1 className="mb-4 text-5xl font-black leading-9">Cromite</h1>
         <h2 className="text-2xl leading-7 text-neutral-400">
-          Cromite is a Bromite fork with ad blocking and enhanced privacy; take
-          back your browser
+          Cromite is a Chromium fork based on Bromite with built-in support for
+          ad blocking and an eye for privacy.
         </h2>
         <div className="flex w-2/3 flex-col gap-4 py-10 md:flex-row">
           <a
@@ -79,7 +79,7 @@ export default function Home() {
           <p className="mb-4 text-lg">
             All patches are published under{" "}
             <a
-              href="https://github.com/bromite/bromite/blob/master/LICENSE"
+              href="https://github.com/uazo/cromite/blob/master/LICENSE"
               className="text-blue-600 hover:underline"
             >
               GNU/GPL v3
@@ -88,8 +88,9 @@ export default function Home() {
           </p>
 
           <p className="mb-4 text-lg">
-            Cromite is only available for Android Marshmallow (v6.0, API level
-            23) and above.
+            Cromite is available for Android arm64-v8a, arm32-v7a and x86_64,
+            Nougat and above (Minimum v8.0, API level 26), Windows and Linux
+            64bit.
           </p>
 
           <div className="flex justify-center">
@@ -183,16 +184,16 @@ export default function Home() {
       </main>
       <footer className="text-center">
         <nav>
-          <a href="/" className="mx-2 hover:underline">
-            Home
-          </a>
           <a
-            href="https://github.com/bromite/bromite"
+            href="https://github.com/uazo/cromite"
             className="mx-2 hover:underline"
           >
             Github project
           </a>
-          <a href="/privacy" className="mx-2 hover:underline">
+          <a
+            href="https://github.com/uazo/cromite/blob/master/docs/PRIVACY_POLICY.md"
+            className="mx-2 hover:underline"
+          >
             Privacy Policy
           </a>
         </nav>
